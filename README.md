@@ -26,6 +26,10 @@
   <li>GCE-GNN: Global Context Enhanced Graph Neural Networks for Session-based Recommendation (SIGIR'20)</li>
   <li>Enhancing Hypergraph Neural Networks with Intent Disentanglement for Session-based Recommendation (SIGIR'2022)</li>
   <li>Dynamic Intent Aware Iterative Denoising Network for Session-based Recommendation (Journal: Information Processing & Management'2022 - IF: 7.4)</li>  
+  <li>Disentangled Graph Collaborative Filtering (SIGIR'2020)</li>
+  <li>Learning Intents behind Interactions with Knowledge Graph for Recommendation (WWW'2021) </li>
+  <li>Intent Disentanglement and Feature Self-Supervision for Novel Recommendation (Journal: IEEE Transactions on Knowledge and Data Engineering'2022 - IF: 8.9) </li>
+
 </ul>
 <h5>Required libraries to run the framework</h5>
 <ul>
