@@ -148,6 +148,16 @@
 
 </ul>
 
+<h5>KIGN and baseline models</h5>
+<ul>
+
+<li>Run this command to reproduce the experiments for the STAMP and baseline models on the shorter version of the Yoochoose dataset: <code>python run_experiments_STAMP_And_baseline_models.py -m stamp_rsc -d rsc15_64 -n</code> and run the following command to create the experiments for the larger version of the Yoochoose dataset <code>python run_experiments_STAMP_And_baseline_models.py -m stamp_rsc -d rsc15_4 -n</code>  </li>
+  
+<li>Download <a href="https://www.dropbox.com/sh/n281js5mgsvao6s/AADQbYxSFVPCun5DfwtsSxeda?dl=0" target="_blank">Diginetica</a> dataset, unzip it and put the “train-item-views.csv” file into the “data” directory/folder. </li>
+<li>Run this command to reproduce the experiments for the STAMP and baseline models on the Diginetica dataset: <code>python run_experiments_STAMP_And_baseline_models.py -m stamp_cikm -d digi -n</code></li> 
+
+</ul>
+
 
 </body>
 </html>  
