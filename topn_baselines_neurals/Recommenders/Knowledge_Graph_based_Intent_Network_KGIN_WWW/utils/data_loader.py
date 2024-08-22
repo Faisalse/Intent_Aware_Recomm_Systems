@@ -139,15 +139,15 @@ def build_sparse_relational_graph(relation_dict):
 def load_data(model_args):
     global args
     args = model_args
-    directory = args.dataset + '/'
+    directory = args.dataset 
     
     print('reading train and test user-item set ...')
-    train_cf = read_cf(directory + 'train.txt')
-    test_cf = read_cf(directory + 'test.txt')
+    train_cf = read_cf(directory / 'train.txt')
+    test_cf = read_cf(directory / 'test.txt')
     remap_item(train_cf, test_cf)
 
     print('combinating train_cf and kg data ...')
-    triplets = read_triplets(directory + 'kg_final.txt')
+    triplets = read_triplets(directory / 'kg_final.txt')
 
     print('building the graph ...')
     graph, relation_dict = build_graph(train_cf, triplets)
