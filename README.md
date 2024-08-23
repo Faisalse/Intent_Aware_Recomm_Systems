@@ -64,16 +64,16 @@
 <h5>Using Docker</h5>
 <ul>
   <li>Download and install Docker from <a href="https://www.docker.com/">https://www.docker.com/</a></li>
-  <li>Run the following command to "pull Docker Image" from Docker Hub: <code>docker pull shefai/session_rec_graph_fusion:latest</code>
-  <li>Clone the GitHub repository by using the link: <code>https://github.com/Faisalse/SessionRecGraphFusion.git</code>
-  <li>Move into the <b>SessionRecGraphFusion</b> directory</li>
+  <li>Run the following command to "pull Docker Image" from Docker Hub: <code>docker pull shefai/intent_aware_recomm_systems</code>
+  <li>Clone the GitHub repository by using the link: <code>https://github.com/Faisalse/Intent_Aware_Recomm_Systems.git</code>
+  <li>Move into the <b>Intent_Aware_Recomm_Systems</b> directory</li>
   
-  <li>Run the command to mount the current directory <i>SessionRecGraphFusion</i> to the docker container named as <i>session_rec_graph_container</i>: <code>docker run --name session_rec_graph_container  -it -v "$(pwd):/SessionRecGraphFusion" -it shefai/session_rec_graph_fusion:latest</code>. If you have the support of CUDA-capable GPUs then run the following command to attach GPUs with the container: <code>docker run --name session_rec_graph_container  -it --gpus all -v "$(pwd):/SessionRecGraphFusion" -it shefai/session_rec_graph_fusion:latest</code></li> 
-<li>If you are already inside the runing container then run the command to navigate to the mounted directory <i>SessionRecGraphFusion</i>: <code>cd /SessionRecGraphFusion</code> otherwise starts the "session_rec_graph_container" and then run the command</li>
-<li>Finally run this command to reproduce the results: <code>python run_config.py conf/in conf/out</code></li>
+  <li>Run the command to mount the current directory <i>Intent_Aware_Recomm_Systems</i> to the docker container named as <i>intent_aware_recomm_systems_container</i>: <code>docker run --name intent_aware_recomm_systems_container  -it -v "$(pwd):/Intent_Aware_Recomm_Systems" -it shefai/intent_aware_recomm_systems</code>. If you have the support of CUDA-capable GPUs then run the following command to attach GPUs with the container: <code>docker run --name intent_aware_recomm_systems_container  -it --gpus all -v "$(pwd):/SessionRecGraphFusion" -it shefai/intent_aware_recomm_systems</code></li> 
+<li>If you are already inside the runing container then run the command to navigate to the mounted directory <i>Intent_Aware_Recomm_Systems</i>: <code>cd /Intent_Aware_Recomm_Systems</code> otherwise starts the "intent_aware_recomm_systems_container"</li>
+<li>Finally, follow the given instructions to run experiments for each model </li>
 </ul>  
 
-  
+
 <h5>Using Anaconda</h5>
   <ul>
     <li>Download Anaconda from <a href="https://www.anaconda.com/">https://www.anaconda.com/</a> and install it</li>
@@ -139,8 +139,6 @@
 <li>Run this command to reproduce the experiments for the HIDE and baseline models on the Tmall dataset: <code>python run_experiments_HIDE_And_baseline_models.py --dataset tmall</code></li> 
 <li>Run this command to reproduce the experiments for the HIDE model with original train-test splits and without any modification in the code: <code>python run_experiments_for_HIDE_withoutAnyChanges.py --dataset tmall</code></li>
 </ul>
-
-
 <h5>KIGN and baseline models</h5>
 <ul>
 <li>Run this command to reproduce the experiments for the KGIN and baseline models on the lastFm dataset: <code>python run_experiments_for_KGIN_baselines_algorithms.py --dataset lastFm</code>  </li>
