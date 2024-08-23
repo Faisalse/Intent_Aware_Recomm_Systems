@@ -88,6 +88,19 @@
         then run this command to install the required libraries to run the experiments on GPU: <code>pip install -r requirements_gpu.txt</code></li>
   </ul>
 </p>
+<h3>Note:</h3>
+<p align="justify">STAMP, DGCF and IDNSR were designed by using the older versions of the tensorflow (1.14.0) and python (3.7.16). Therefore, we provide seperate settings and installation guide to run the experiments for these models.</p>  
+<h5>Using Docker</h5>
+<ul>
+  <li>Download and install Docker from <a href="https://www.docker.com/">https://www.docker.com/</a></li>
+  <li>Run the following command to "pull Docker Image" from Docker Hub: <code>docker pull shefai/intent_aware_recomm_systems</code>
+  <li>Clone the GitHub repository by using the link: <code>https://github.com/Faisalse/Intent_Aware_Recomm_Systems.git</code>
+  <li>Move into the <b>Intent_Aware_Recomm_Systems</b> directory</li>
+  
+  <li>Run the command to mount the current directory <i>Intent_Aware_Recomm_Systems</i> to the docker container named as <i>intent_aware_recomm_systems_container</i>: <code>docker run --name intent_aware_recomm_systems_container  -it -v "$(pwd):/Intent_Aware_Recomm_Systems" -it shefai/intent_aware_recomm_systems</code>. If you have the support of CUDA-capable GPUs then run the following command to attach GPUs with the container: <code>docker run --name intent_aware_recomm_systems_container  -it --gpus all -v "$(pwd):/SessionRecGraphFusion" -it shefai/intent_aware_recomm_systems</code></li> 
+<li>If you are already inside the runing container then run the command to navigate to the mounted directory <i>Intent_Aware_Recomm_Systems</i>: <code>cd /Intent_Aware_Recomm_Systems</code> otherwise starts the "intent_aware_recomm_systems_container"</li>
+<li>Finally, follow the given instructions to run the experiments for each model </li>
+</ul>  
 
 <h2>Follow these steps to reproduce experiments for Intent Aware and Non-Intent Aware Recommender Systems</h2>
 <h5>TAGNN and baseline models</h5>
