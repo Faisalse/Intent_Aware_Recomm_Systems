@@ -4,11 +4,9 @@ import time
 # import files for dl
 from TAGNN.TAGNN_code.utils import build_graph, Data, split_validation
 from TAGNN.TAGNN_code.model import *
-
 # import files for preprocessing
 from TAGNN.data_preprocessing.digi_data_preprocessing import *
 from TAGNN.data_preprocessing.rsc15_data_preprocessing import *
-
 # baseline models
 from TAGNN.baselines.SR.main_sr import *
 # vstan model
@@ -25,7 +23,7 @@ from TAGNN.accuracy_measures import *
 import pandas as pd
 parser = argparse.ArgumentParser()
 parser.add_argument('--model', default='TAGNN')
-parser.add_argument('--dataset', default='yoochoose1_64', help='dataset name: diginetica/yoochoose1_64')
+parser.add_argument('--dataset', default='diginetica', help='dataset name: diginetica/yoochoose1_64')
 parser.add_argument('--batchSize', type=int, default=100, help='input batch size')
 parser.add_argument('--hiddenSize', type=int, default=100, help='hidden state size')
 parser.add_argument('--epoch', type=int, default=30, help='the number of epochs to train for')

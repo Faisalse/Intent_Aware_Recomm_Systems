@@ -79,7 +79,7 @@ def parse_args(dataset, dim, lr, sim_regularity, batch_size, node_dropout, node_
     return parser.parse_args()
 
 
-def run_experiments_KGIN_model(dataset="lastFm", dim=64, lr= 0.0001, sim_regularity=0.0001, batch_size=1024,
+def run_experiments_KGIN_model(dataset, dim=64, lr= 0.0001, sim_regularity=0.0001, batch_size=1024,
                       node_dropout=True, node_dropout_rate=0.5, mess_dropout=True, mess_dropout_rate=0.1, gpu_id=0, context_hops=3, epoch = 60):
     
     """fix the random seed"""
@@ -97,7 +97,7 @@ def run_experiments_KGIN_model(dataset="lastFm", dim=64, lr= 0.0001, sim_regular
     """read args"""
     device = torch.device("cuda:"+str(args.gpu_id)) if args.cuda else torch.device("cpu")
     """build dataset"""
-    train_cf, test_cf, user_dict, n_params, graph, mat_list = load_data(args)
+    train_cf, test_cf, user_dict, n_params, graph, mat_list = load_data(args, dataset)
     adj_mat_list, norm_mat_list, mean_mat_list = mat_list
 
     n_users = n_params['n_users']

@@ -87,10 +87,10 @@ class EASE_R_Recommender(BaseItemSimilarityMatrixRecommender):
 
         if self._is_content_sparse_check(B):
             self._print("Detected model matrix to be sparse, changing format.")
-            self.W_sparse = check_matrix(B, format='csr', dtype=float32)
+            self.W_sparse = check_matrix(B, format='csr', dtype=np.float32)
 
         else:
-            self.W_sparse = check_matrix(B, format='npy', dtype=float32)
+            self.W_sparse = check_matrix(B, format='npy', dtype=np.float32)
             self._W_sparse_format_checked = True
             self._compute_item_score = self._compute_score_W_dense
         #

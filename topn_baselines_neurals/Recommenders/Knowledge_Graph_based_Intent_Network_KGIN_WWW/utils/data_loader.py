@@ -136,10 +136,10 @@ def build_sparse_relational_graph(relation_dict):
     return adj_mat_list, norm_mat_list, mean_mat_list
 
 
-def load_data(model_args):
+def load_data(model_args, datapath):
     global args
     args = model_args
-    directory = args.dataset 
+    directory = datapath
     
     print('reading train and test user-item set ...')
     train_cf = read_cf(directory / 'train.txt')

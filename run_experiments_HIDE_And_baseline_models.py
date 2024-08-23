@@ -170,6 +170,7 @@ def run_experiments_for_HIDE():
         
 if __name__ == '__main__':
     #sequnetial model
+    run_experiments_for_HIDE()
     print("SR model")
     se_obj = SequentialRulesMain(data_path, result_path, dataset = opt.dataset)
     se_obj.fit_(opt.topKList)
@@ -189,7 +190,7 @@ if __name__ == '__main__':
     sfcknn_obj = SFCKNN_MAIN(data_path, result_path, dataset = opt.dataset)
     sfcknn_obj.fit_(opt.topKList)
     
-    run_experiments_for_HIDE()
+    
 
 
 

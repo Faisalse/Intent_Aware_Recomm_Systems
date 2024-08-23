@@ -22,18 +22,26 @@ def _get_instance(recommender_class, URM_train, ICM_all, UCM_all):
     return recommender_object
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Accept data name as input')
-    parser.add_argument('--dataset', default='amazonBook', help="alibabaFashion / amazonBook / lastFm")
+    parser.add_argument('--dataset', type = str, default='lastFm', help="alibabaFashion / amazonBook / lastFm")
     args = parser.parse_args()
-    print("<<<<<<<<<<<<<<<<<<<<<< Experiments are running..... Wait for results......")
-    commonFolderName = "results"
     dataset_name = args.dataset
-    dataSetType = "given"
+    print("<<<<<<<<<<<<<<<<<<<<<< Experiments are running for  "+dataset_name+" dataset Wait for results......")
+    commonFolderName = "results"
+    
     task = "training"
     data_path = Path("data/KGIN/"+dataset_name)
     data_path = data_path.resolve()
-    
-
     # If directory does not exist, create
+
+    ############### prepare baseline data ###############
+    baseline_models = "baseline_models"
+    validation_set = False
+    dataset_object = lastFM_AmazonBook_AliBabaFashion_KGIN()
+    URM_train, URM_test = dataset_object._load_data_from_give_files(data_path, validation=validation_set)
+    ICM_all = None
+    UCM_all = None
+    ################# end to prepare baseline data #################
+    
     if dataset_name == "lastFm":
         
         dim=64
@@ -75,8 +83,6 @@ if __name__ == '__main__':
         epoch = 200
     else:
         print("If you do not mention HPs values then it will default HP values of lastFm dataset")
-
-        
         dim=64,
         lr = 0.0001
         sim_regularity=0.0001
@@ -87,8 +93,6 @@ if __name__ == '__main__':
         mess_dropout_rate=0.1 
         gpu_id=0
         context_hops=3
-
-    
     result_df = run_experiments_KGIN_model(dataset=data_path, dim=dim, lr = lr, sim_regularity=sim_regularity, batch_size=batch_size, 
                                            node_dropout=node_dropout, node_dropout_rate=node_dropout_rate, mess_dropout=mess_dropout, 
                                            mess_dropout_rate=mess_dropout_rate, gpu_id=gpu_id, context_hops=context_hops, epoch = epoch)
@@ -97,10 +101,9 @@ if __name__ == '__main__':
     saved_results_dl = "/".join([commonFolderName,"KGIN", dataset_name] )
     if not os.path.exists(saved_results_dl):
         os.makedirs(saved_results_dl)
-
+    
     
     result_df.to_csv(saved_results_dl+"KGIN_model_"+dataset_name+".text", index = False, sep = "\t")
-
     ### experiments for baseline models.....................
     baseline_models = "baseline_models"
     validation_set = False

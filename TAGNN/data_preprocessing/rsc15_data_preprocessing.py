@@ -24,7 +24,7 @@ MINIMUM_SESSION_LENGTH = 2
     
 def load_data_rsc15( file ):     
     #load csv
-    data = pd.read_csv( file, sep=',', header=None, usecols=[0,1,2], dtype={0:np.int32, 1:str, 2:np.int64})
+    data = pd.read_csv( file, sep=',', header=None, usecols=[0,1,2])
     #specify header names
     data.columns = ['SessionId', 'TimeStr', 'ItemId']
     
