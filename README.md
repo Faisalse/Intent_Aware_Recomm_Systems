@@ -34,26 +34,30 @@
 <h5>Required libraries to run the framework</h5>
 <ul>
   <li>Anaconda 4.X (Python 3.5 or higher)</li>
-  <li>numpy=1.23.5</li>
-  <li>pandas=1.5.3</li>
-  <li>torch=1.13.1</li>
-  <li>scipy=1.10.1</li>
-  <li>python-dateutil=2.8.1</li>
-  <li>pytz=2021.1</li>
-  <li>certifi=2020.12.5</li>
-  <li>pyyaml=5.4.1</li>
-  <li>networkx=2.5.1</li>
-  <li>scikit-learn=0.24.2</li>
-  <li>keras=2.11.0</li>
+  <li>numpy</li>
+  <li>pandas</li>
+  <li>torch</li>
+  <li>torchvision</li>
+  <li>torch_geometric</li>
+  <li>pyg_lib</li>
+  <li>torch-scatter</li>
+  <li>torch-sparse</li>
+  <li>torch-cluster</li>
+  <li>torch-spline-conv</li>
+  <li>prettytable</li>
+  <li>python-dateutil</li>
+  <li>nltk</li>
+  <li>scipy</li>
+  <li>pytz</li>
+  <li>certifi</li>
+  <li>pyyaml</li>
+  <li>scikit-learn</li>
   <li>six=1.15.0</li>
-  <li>theano=1.0.3</li>
   <li>psutil=5.8.0</li>
   <li>pympler=0.9</li>
   <li>Scikit-optimize</li>
-  <li>tensorflow=2.11.0</li>
   <li>tables=3.8.0</li>
   <li>scikit-optimize=0.8.1</li>
-  <li>python-telegram-bot=13.5</li>
   <li>tqdm=4.64.1</li>
   <li>dill=0.3.6</li>
   <li>numba</li>
@@ -72,8 +76,6 @@
 <li>If you are already inside the runing container then run the command to navigate to the mounted directory <i>Intent_Aware_Recomm_Systems</i>: <code>cd /Intent_Aware_Recomm_Systems</code> otherwise starts the "intent_aware_recomm_systems_container"</li>
 <li>Finally, follow the given instructions to run the experiments for each model </li>
 </ul>  
-
-
 <h5>Using Anaconda</h5>
   <ul>
     <li>Download Anaconda from <a href="https://www.anaconda.com/">https://www.anaconda.com/</a> and install it</li>
@@ -84,7 +86,6 @@
     <li>Run this command to activate the virtual environment: <code>conda activate Intent_Aware_Recomm_Systems</code></li>
     <li>Run this command to install the required libraries for CPU: <code>pip install -r requirements_cpu.txt</code>. However, if you have support of CUDA-capable GPUs, 
         then run this command to install the required libraries to run the experiments on GPU: <code>pip install -r requirements_gpu.txt</code></li>
-
   </ul>
 </p>
 
