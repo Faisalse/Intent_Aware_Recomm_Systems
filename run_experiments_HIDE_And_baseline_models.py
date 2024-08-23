@@ -24,7 +24,7 @@ def init_seed(seed=None):
     torch.cuda.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
 parser = argparse.ArgumentParser()
-parser.add_argument('--dataset', default='tmall', help='diginetica/Nowplaying/Tmall')
+parser.add_argument('--dataset', default='Tmall', help='diginetica/Nowplaying/Tmall')
 parser.add_argument('--model', default='HIDE', help='[GCEGNN, SRGNN, DHCN, SAHNN, COTREC]')
 parser.add_argument('--hiddenSize', type=int, default=100)
 parser.add_argument('--epoch', type=int, default=20)
@@ -73,7 +73,7 @@ def run_experiments_for_HIDE():
     sw = []
     for i in range(2, opt.w+1):
         sw.append(i)
-    if opt.dataset == 'tmall':
+    if opt.dataset == 'Tmall':
         
         name = "dataset15.csv"
         obj1 = Tmall()

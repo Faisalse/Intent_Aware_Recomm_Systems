@@ -70,7 +70,7 @@
   
   <li>Run the command to mount the current directory <i>Intent_Aware_Recomm_Systems</i> to the docker container named as <i>intent_aware_recomm_systems_container</i>: <code>docker run --name intent_aware_recomm_systems_container  -it -v "$(pwd):/Intent_Aware_Recomm_Systems" -it shefai/intent_aware_recomm_systems</code>. If you have the support of CUDA-capable GPUs then run the following command to attach GPUs with the container: <code>docker run --name intent_aware_recomm_systems_container  -it --gpus all -v "$(pwd):/SessionRecGraphFusion" -it shefai/intent_aware_recomm_systems</code></li> 
 <li>If you are already inside the runing container then run the command to navigate to the mounted directory <i>Intent_Aware_Recomm_Systems</i>: <code>cd /Intent_Aware_Recomm_Systems</code> otherwise starts the "intent_aware_recomm_systems_container"</li>
-<li>Finally, follow the given instructions to run experiments for each model </li>
+<li>Finally, follow the given instructions to run the experiments for each model </li>
 </ul>  
 
 
@@ -84,7 +84,7 @@
     <li>Run this command to activate the virtual environment: <code>conda activate Intent_Aware_Recomm_Systems</code></li>
     <li>Run this command to install the required libraries for CPU: <code>pip install -r requirements_cpu.txt</code>. However, if you have support of CUDA-capable GPUs, 
         then run this command to install the required libraries to run the experiments on GPU: <code>pip install -r requirements_gpu.txt</code></li>
-    <li>If you do not understand the instructions, then check the video to run the experiments: (https://youtu.be/uCW2omAxYP8?si=UW_YjJ_GqACuc_Gs)</li>
+
   </ul>
 </p>
 
@@ -137,8 +137,9 @@
 
 <li>Download <a href="https://www.dropbox.com/sh/n281js5mgsvao6s/AADQbYxSFVPCun5DfwtsSxeda?dl=0" target="_blank">Tmall</a> dataset, unzip it and put the “dataset15.csv” file into the “data” directory/folder. </li>
 <li>Run this command to reproduce the experiments for the HIDE and baseline models on the Tmall dataset: <code>python run_experiments_HIDE_And_baseline_models.py --dataset tmall</code></li> 
-<li>Run this command to reproduce the experiments for the HIDE model with original train-test splits and without any modification in the code: <code>python run_experiments_for_HIDE_withoutAnyChanges.py --dataset tmall</code></li>
+<li>Run this command to reproduce the experiments for the HIDE model with original train-test splits and without any modification in the code: <code>python run_experiments_for_HIDE_withoutAnyChanges.py --dataset Tmall</code></li>
 </ul>
+
 <h5>KIGN and baseline models</h5>
 <ul>
 <li>Run this command to reproduce the experiments for the KGIN and baseline models on the lastFm dataset: <code>python run_experiments_for_KGIN_baselines_algorithms.py --dataset lastFm</code>  </li>
