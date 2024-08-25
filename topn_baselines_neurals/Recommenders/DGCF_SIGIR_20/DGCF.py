@@ -23,9 +23,9 @@ import numpy as np
 
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-from Recommenders.DGCF_SIGIR_20.utility.helper import *
-from Recommenders.DGCF_SIGIR_20.utility.batch_test import *
-from Recommenders.DGCF_SIGIR_20.utility.load_data import *
+from topn_baselines_neurals.Recommenders.DGCF_SIGIR_20.utility.helper import *
+from topn_baselines_neurals.Recommenders.DGCF_SIGIR_20.utility.batch_test import *
+from topn_baselines_neurals.Recommenders.DGCF_SIGIR_20.utility.load_data import *
 
 
 
@@ -404,17 +404,14 @@ def sample_cor_samples(n_users, n_items, cor_batch_size):
 
     return cor_users, cor_items
 
-def run_experiments(args = None):
-    
+def run_experiments(data_path, args = None):
     data_generator = Data(path=args.data_path + args.dataset, batch_size=args.batch_size)
     USR_NUM, ITEM_NUM = data_generator.n_users, data_generator.n_items
     #N_TRAIN, N_TEST = data_generator.n_train, data_generator.n_test
     batch_size = args.batch_size
-    
     print("************************* Run with following settings 🏃 ***************************")
     print(args)
     print("************************************************************************************")
-
     config = dict()
     config['n_users'] = data_generator.n_users
     config['n_items'] = data_generator.n_items

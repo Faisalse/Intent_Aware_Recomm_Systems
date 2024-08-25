@@ -1,26 +1,19 @@
 
-from Recommenders.DGCF_SIGIR_20.DGCF import *
+from topn_baselines_neurals.Recommenders.DGCF_SIGIR_20.DGCF import *
 import argparse
-
-
+from pathlib import Path
 # *************************************************** #
-path = None
-DATASET_NAME = "amazonbook"    # amazonbook, gowalla, yelp2018
-MODELNAME = "DGCF/"
-PATH_GETDATA = "Data_manager_split_datasets/"+MODELNAME
+
+
  
 # Main file to run experiments......
 def parse_args():
     parser = argparse.ArgumentParser(description="Run DGCF.")
-    parser.add_argument('--data_path', nargs='?', default=PATH_GETDATA,
-                        help='Input data path.')
-    parser.add_argument('--proj_path', nargs='?', default='',
-                        help='Project path.')
+    parser.add_argument('--data_path', nargs='?', default=PATH_GETDATA,help='Input data path.')
+    parser.add_argument('--proj_path', nargs='?', default='',help='Project path.')
     
-    parser.add_argument('--pick', type=int, default=0,
-                        help='O for no pick, 1 for pick')
-    parser.add_argument('--pick_scale', type=float, default=1e10,
-                        help='Scale')
+    parser.add_argument('--pick', type=int, default=0,help='O for no pick, 1 for pick')
+    parser.add_argument('--pick_scale', type=float, default=1e10,help='Scale')
     parser.add_argument('--dataset', nargs='?', default=DATASET_NAME,
                         help='Choose a dataset from {gowalla, yelp2018, amazon-book}')
     parser.add_argument('--pretrain', type=int, default=0,
@@ -29,7 +22,6 @@ def parse_args():
                         help='Name for pretrained model.')
     parser.add_argument('--verbose', type=int, default=1,
                         help='Interval of evaluation.')
-
     parser.add_argument('--epoch', type=int, default=10,
                         help='Number of epochs')      
     parser.add_argument('--embed_size', type=int, default=64,
@@ -58,7 +50,6 @@ def parse_args():
                         help='Step for stopping')           
     parser.add_argument('--Ks', nargs='?', default='[20, 40, 60, 80, 100]',
                         help='Metrics scale')
-
     parser.add_argument('--save_flag', type=int, default=0,
                         help='0: Disable model saver, 1: Save Better Model')
     parser.add_argument('--save_name', nargs='?', default='best_model',
@@ -66,11 +57,17 @@ def parse_args():
     
     parser.add_argument('--test_flag', nargs='?', default='part',
                         help='Specify the test type from {part, full}, indicating whether the reference is done in mini-batch')
-
     return parser.parse_args()
 
 args = parse_args()
-result_dict = run_experiments(args = args)
+dataset_name  = args.dataset
+data_path = Path("data/DGCF/"+dataset_name)
+data_path = data_path.resolve()
+
+result_dict = run_experiments(data_path, args = args)
+    # amazonbook, gowalla, yelp2018
+
+
 PATH_SAVE_RESULT = None
 
 for key in result_dict:

@@ -8,12 +8,12 @@ Created on 14/09/17
 
 import pandas as pd
 import zipfile, shutil
-from Data_manager.DataReader import DataReader
-from Data_manager.DataReader_utils import download_from_URL
-from Data_manager.DatasetMapperManager import DatasetMapperManager
-from Data_manager.Movielens._utils_movielens_parser import _loadURM, _loadICM_genres_years
+from topn_baselines_neurals.Data_manager.DataReader import DataReader
+from topn_baselines_neurals.Data_manager.DataReader_utils import download_from_URL
+from topn_baselines_neurals.Data_manager.DatasetMapperManager import DatasetMapperManager
+from topn_baselines_neurals.Data_manager.Movielens._utils_movielens_parser import _loadURM, _loadICM_genres_years
 import pickle
-from Data_manager.split_functions.ieee_transactions_given_train_test_splits import split_train_test_validation
+from topn_baselines_neurals.Data_manager.split_functions.ieee_transactions_given_train_test_splits import split_train_test_validation
 
 
 class Movielens100MReaderGiven(DataReader):
@@ -35,10 +35,10 @@ class Movielens100MReaderGiven(DataReader):
         return self.DATASET_SUBFOLDER
     
     
-    def _load_data_from_give_files(self, validation = False, data_name = "MovieLens"):
+    def _load_data_from_give_files(self, validation = False, data_path = "MovieLens.pkl"):
         
 
-        zipFile_path = self.DATASET_SPLIT_ROOT_FOLDER + self.CONFERENCE_JOURNAL + data_name+".pkl"
+        zipFile_path = data_path
         
         try:
             

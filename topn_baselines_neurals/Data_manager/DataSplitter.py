@@ -7,7 +7,7 @@ Created on 30/11/18
 """
 
 import traceback, os
-from Data_manager.DataReader import DataReader
+from topn_baselines_neurals.Data_manager.DataReader import DataReader
 
 class DataSplitter(object):
     """

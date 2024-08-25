@@ -8,11 +8,7 @@ Created on 23/04/2019
 
 import numpy as np
 import scipy.sparse as sps
-from Data_manager.IncrementalSparseMatrix import IncrementalSparseMatrix
-
-
-
-
+from topn_baselines_neurals.Data_manager.IncrementalSparseMatrix import IncrementalSparseMatrix
 def split_train_test_validation(loaded_dataset, given_test_data, validation = False):
     """
     The function splits an URM in two matrices selecting the k_out interactions one user at a time

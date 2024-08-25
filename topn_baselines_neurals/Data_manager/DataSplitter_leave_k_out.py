@@ -8,14 +8,12 @@ Created on 12/01/18
 
 import scipy.sparse as sps
 import numpy as np
-from Recommenders.DataIO import DataIO
-
-from Data_manager.DataSplitter import DataSplitter as _DataSplitter
-from Data_manager.DataReader import DataReader as _DataReader
-
-from Data_manager.DataReader_utils import compute_density, reconcile_mapper_with_removed_tokens
-from Data_manager.split_functions.split_train_validation_leave_k_out import split_train_leave_k_out_user_wise
-from Data_manager.data_consistency_check import assert_disjoint_matrices, assert_URM_ICM_mapper_consistency
+from topn_baselines_neurals.Recommenders.DataIO import DataIO
+from topn_baselines_neurals.Data_manager.DataSplitter import DataSplitter as _DataSplitter
+from topn_baselines_neurals.Data_manager.DataReader import DataReader as _DataReader
+from topn_baselines_neurals.Data_manager.DataReader_utils import compute_density, reconcile_mapper_with_removed_tokens
+from topn_baselines_neurals.Data_manager.split_functions.split_train_validation_leave_k_out import split_train_leave_k_out_user_wise
+from topn_baselines_neurals.Data_manager.data_consistency_check import assert_disjoint_matrices, assert_URM_ICM_mapper_consistency
 
 
 class DataSplitter_leave_k_out(_DataSplitter):
