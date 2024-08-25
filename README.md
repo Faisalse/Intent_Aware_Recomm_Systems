@@ -52,14 +52,14 @@
   <li>certifi</li>
   <li>pyyaml</li>
   <li>scikit-learn</li>
-  <li>six=1.15.0</li>
-  <li>psutil=5.8.0</li>
-  <li>pympler=0.9</li>
+  <li>six</li>
+  <li>psutil</li>
+  <li>pympler</li>
   <li>Scikit-optimize</li>
-  <li>tables=3.8.0</li>
-  <li>scikit-optimize=0.8.1</li>
-  <li>tqdm=4.64.1</li>
-  <li>dill=0.3.6</li>
+  <li>tables</li>
+  <li>scikit-optimize</li>
+  <li>tqdm</li>
+  <li>dill</li>
   <li>numba</li>
 </ul>
 <h2>Installation guide</h2>  
@@ -95,11 +95,6 @@
 <ul>
   <li>Under Contruction.....</li>
 </ul> 
-
-
-
-
-
 
 
 <h2>Follow these steps to reproduce experiments for Intent Aware and Non-Intent Aware Recommender Systems</h2>
