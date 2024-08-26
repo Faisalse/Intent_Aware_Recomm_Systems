@@ -228,7 +228,7 @@ class Run_experiments_for_IDSNR:
     def __init__(self,model = "NCF", dataset = "MovieLens"):
         # get best epoch through stopping mechanism
         obj = IDSNR_model(model = model, data = dataset, validation = True)
-        best_score, stopped_epoch =  obj.model_tuninig(1)
+        best_score, stopped_epoch =  obj.model_tuninig(100)
         stopped_epoch = stopped_epoch + 1
         print("Best Epoch Value    "+ str(stopped_epoch))
         obj = IDSNR_model(model = model,data = dataset, validation = False)

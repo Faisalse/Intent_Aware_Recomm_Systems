@@ -23,7 +23,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Accept data name as input')
     parser.add_argument('--dataset', type = str, default='MovieLens', help="MovieLens/Music/Beauty")
-    parser.add_argument('--model', type = str, default='NCF', help="LFM or NCF")
+    parser.add_argument('--model', type = str, default='LFM', help="LFM or NCF")
     args = parser.parse_args()
     dataset_name = args.dataset
 
@@ -35,8 +35,6 @@ if __name__ == '__main__':
     # python run_experiments_IDS4NR_baselines_algorithms.py --dataset Beauty --model LFM
     # python run_experiments_IDS4NR_baselines_algorithms.py --dataset Music --model LFM
 
-
-    
     print("<<<<<<<<<<<<<<<<<<<<<< Experiments are running for  "+dataset_name+" dataset Wait for results......")
     commonFolderName = "results"
     data_path = Path("data/ID4SNR/")
