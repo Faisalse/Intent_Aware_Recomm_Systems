@@ -88,7 +88,7 @@
   </ul>
 </p>
 <h3>Note:</h3>
-<p align="justify">STAMP and DGCF were designed by using the older versions of the TensorFlow  and Python. Therefore, we provide seperate settings and installation guide to run the experiments for these models.</p>
+<p align="justify">STAMP and DGCF were designed by using the older versions of the TensorFlow  and Python. Therefore, we provide seperate settings to run the experiments for these models.</p>
 <ul>
 <li>Python=3.7.16</li>
 <li>TensorFlow=1.14.0</li>
