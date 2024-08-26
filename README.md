@@ -33,7 +33,7 @@
 </ul>
 <h5>Required libraries to run the framework</h5>
 <ul>
-  <li>Anaconda 4.X (Python 3.5 or higher)</li>
+  <li>Anaconda 4.X (Python 3.8 or higher)</li>
   <li>numpy</li>
   <li>pandas</li>
   <li>torch</li>
