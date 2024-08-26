@@ -94,10 +94,6 @@
 <li>TensorFlow=1.14.0</li>
 </ul>
 
-<ul>
-  <li>Under Contruction.....</li>
-</ul> 
-
 
 <h2>Follow these steps to reproduce experiments for Intent Aware and Non-Intent Aware Recommender Systems</h2>
 <h5>TAGNN and baseline models</h5>
