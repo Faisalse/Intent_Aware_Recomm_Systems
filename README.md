@@ -95,7 +95,7 @@
 </ul>
 
 
-<h2>Follow these steps to reproduce experiments for Intent Aware and Non-Intent Aware Recommender Systems</h2>
+<h2>Follow these steps to reproduce the results for Intent Aware and Non-Intent Aware Recommender Systems</h2>
 <h5>TAGNN and baseline models</h5>
 <ul>
 <li>Download <a href="https://www.dropbox.com/sh/n281js5mgsvao6s/AADQbYxSFVPCun5DfwtsSxeda?dl=0" target="_blank">Yoochoose</a> dataset, unzip it and put the “yoochoose-clicks.dat” file into the “data” directory/folder. </li>
