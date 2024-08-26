@@ -12,7 +12,7 @@ import tensorflow as tf
 
 
 #  import m
-from Recommenders.DGCF_SIGIR_20.utility.accuracy_measures import *
+from topn_baselines_neurals.Recommenders.DGCF_SIGIR_20.utility.accuracy_measures import *
 Recall_ = dict()
 NDCG_ = dict()
 

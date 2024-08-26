@@ -1,17 +1,8 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on 23/10/17
-
-@author: Maurizio Ferrari Dacrema
-"""
-
 import numpy as np
 import time, sys
 import scipy.sparse as sps
-import topn_baselines_neurals.Recommenders.Recommender_utils as recommender_utils
 from topn_baselines_neurals.Utils.seconds_to_biggest_unit import seconds_to_biggest_unit
-
+import topn_baselines_neurals.Recommenders.Recommender_utils as recommender_utils
 
 
 class Incremental_Similarity_Builder:
@@ -38,10 +29,7 @@ class Incremental_Similarity_Builder:
         self._row_array = np.zeros(self._initial_data_block, dtype=self._dtype_coordinates)
         self._col_array = np.zeros(self._initial_data_block, dtype=self._dtype_coordinates)
         self._data_array = np.zeros(self._initial_data_block, dtype=self._dtype_data)
-
-
     def add_data_lists(self, row_list_to_add, col_list_to_add, data_list_to_add):
-
         for data_point_index in range(len(row_list_to_add)):
 
             if self._next_cell_pointer == len(self._row_array):

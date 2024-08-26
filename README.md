@@ -64,7 +64,6 @@
 </ul>
 <h2>Installation guide</h2>  
 <p>This is how the framework can be downloaded and configured to run the experiments</p>
-  
 <h5>Using Docker</h5>
 <ul>
   <li>Download and install Docker from <a href="https://www.docker.com/">https://www.docker.com/</a></li>
@@ -89,8 +88,18 @@
   </ul>
 </p>
 <h3>Note:</h3>
-<p align="justify">STAMP and DGCF were designed by using the older versions of the tensorflow (1.14.0) and python (3.7.16). Therefore, we provide seperate settings and installation guide to run the experiments for these models.</p>  
-<h5>Using Docker</h5>
+<p align="justify">STAMP and DGCF were designed by using the older versions of the TensorFlow  and Python. Therefore, we provide seperate settings and installation guide to run the experiments for these models.</p>  
+<h5>STAMP</h5>
+<ul>
+<li>Python=3.7.16</li>
+<li>TensorFlow=1.14.0</li>
+</ul>
+
+<h5>DGCF</h5>
+<ul>
+<li>Python=3.6.13</li>
+<li>TensorFlow=1.14.0</li>
+</ul>
 
 <ul>
   <li>Under Contruction.....</li>
@@ -165,20 +174,12 @@
 
 <li>Run this command to reproduce the experiments for the IDS4NR_NCF and baseline models on the Music dataset: <code>python run_experiments_IDS4NR_baselines_algorithms.py --dataset Music --model NCF</code>  </li>
 
-
 <li>Run this command to reproduce the experiments for the IDS4NR_LFM and baseline models on the MovieLens dataset: <code>python run_experiments_IDS4NR_baselines_algorithms.py --dataset MovieLens --model LFM</code>  </li>
 
 <li>Run this command to reproduce the experiments for the IDS4NR_LFM and baseline models on the Beauty dataset: <code>python run_experiments_IDS4NR_baselines_algorithms.py --dataset Beauty --model LFM</code>  </li>
 
 <li>Run this command to reproduce the experiments for the IDS4NR_LFM and baseline models on the Music dataset: <code>python run_experiments_IDS4NR_baselines_algorithms.py --dataset Music --model LFM</code>  </li>
-
-
-
 </ul>
-
-
-
-
 <h5>STAMP and baseline models</h5>
 <ul>
 <li>Download <a href="https://www.dropbox.com/sh/n281js5mgsvao6s/AADQbYxSFVPCun5DfwtsSxeda?dl=0" target="_blank">Yoochoose</a> dataset, unzip it and put the “yoochoose-clicks.dat” file into the “data” directory/folder. </li>
@@ -186,6 +187,23 @@
 <li>Download <a href="https://www.dropbox.com/sh/n281js5mgsvao6s/AADQbYxSFVPCun5DfwtsSxeda?dl=0" target="_blank">Diginetica</a> dataset, unzip it and put the “train-item-views.csv” file into the “data” directory/folder. </li>
 <li>Run this command to reproduce the experiments for the STAMP and baseline models on the Diginetica dataset: <code>python run_experiments_STAMP_And_baseline_models.py -m stamp_cikm -d digi -n</code></li> 
 </ul>
+
+<h5>DGCF and baseline models</h5>
+<ul>
+
+<li>Run this command to reproduce the experiments for the DGCF on the Yelp2018 dataset: <code>python run_experiments_for_DGCF_algorithm.py --dataset yelp2018</code>  </li>
+
+<li>Run this command to reproduce the experiments for the baseline models on the Yelp2018 dataset: <code>python run_experiments_DGCF_baseline_algorithms.py --dataset yelp2018</code>  </li>
+
+<li>Run this command to reproduce the experiments for the DGCF on the Gowalla dataset: <code>python run_experiments_for_DGCF_algorithm.py --dataset gowalla</code>  </li>
+
+<li>Run this command to reproduce the experiments for the baseline models on the Gowalla dataset: <code>python run_experiments_DGCF_baseline_algorithms.py --dataset gowalla</code>  </li>
+
+<li>Run this command to reproduce the experiments for the DGCF on the Amazon-book dataset: <code>python run_experiments_for_DGCF_algorithm.py --dataset amazonbook</code>  </li>
+
+<li>Run this command to reproduce the experiments for the baseline models on the Amazon-book dataset: <code>python run_experiments_DGCF_baseline_algorithms.py --dataset amazonbook</code>  </li>
+
+
 
 
 </body>

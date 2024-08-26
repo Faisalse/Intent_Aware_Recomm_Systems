@@ -401,13 +401,12 @@ def sample_cor_samples(n_users, n_items, cor_batch_size):
     '''
     cor_users = rd.sample(list(range(n_users)), cor_batch_size)
     cor_items = rd.sample(list(range(n_items)), cor_batch_size)
-
     return cor_users, cor_items
 
 def run_experiments(data_path, args = None):
-    data_generator = Data(path=args.data_path + args.dataset, batch_size=args.batch_size)
+    data_generator = Data(path= data_path, batch_size=args.batch_size)
     USR_NUM, ITEM_NUM = data_generator.n_users, data_generator.n_items
-    #N_TRAIN, N_TEST = data_generator.n_train, data_generator.n_test
+    
     batch_size = args.batch_size
     print("************************* Run with following settings 🏃 ***************************")
     print(args)

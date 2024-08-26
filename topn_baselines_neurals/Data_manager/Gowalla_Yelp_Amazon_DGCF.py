@@ -8,12 +8,12 @@ Created on 14/09/17
 
 import pandas as pd
 import zipfile, shutil
-from Data_manager.DataReader import DataReader
-from Data_manager.DataReader_utils import download_from_URL
-from Data_manager.DatasetMapperManager import DatasetMapperManager
-from Data_manager.Movielens._utils_movielens_parser import _loadURM, _loadICM_genres_years
+from topn_baselines_neurals.Data_manager.DataReader import DataReader
+from topn_baselines_neurals.Data_manager.DataReader_utils import download_from_URL
+from topn_baselines_neurals.Data_manager.DatasetMapperManager import DatasetMapperManager
+from topn_baselines_neurals.Data_manager.Movielens._utils_movielens_parser import _loadURM, _loadICM_genres_years
 import pickle
-from Data_manager.split_functions.DGCF_given_train_test_splits import split_train_test_validation
+from topn_baselines_neurals.Data_manager.split_functions.DGCF_given_train_test_splits import split_train_test_validation
 
 
 class Gowalla_Yelp_Amazon_DGCF(DataReader):
@@ -37,20 +37,19 @@ class Gowalla_Yelp_Amazon_DGCF(DataReader):
     
     def _load_data_from_give_files(self, validation = False, data_name = "yelp2018"):
         
-
-        zipFile_path = self.DATASET_SPLIT_ROOT_FOLDER + self.CONFERENCE_JOURNAL + data_name+"/"
+        zipFile_path = data_name
         train_list = list()
         test_list = list()
         try:
 
-            with open(zipFile_path+"train.txt") as f:
+            with open(zipFile_path/ "train.txt") as f:
                 for l in f.readlines():
                     if len(l) > 0:
                         l = l.strip('\n').split(' ')
                         items = [int(i) for i in l[1:]]
                         train_list.append(set(items))
             
-            with open(zipFile_path+"test.txt") as f:
+            with open(zipFile_path/"test.txt") as f:
                 for l in f.readlines():
                     if len(l) > 0:
                         l = l.strip('\n').split(' ')
@@ -59,9 +58,7 @@ class Gowalla_Yelp_Amazon_DGCF(DataReader):
 
         except FileNotFoundError:
             print(f"File not found: {zipFile_path}")
-
         URM_dataframe = self.convert_dictionary_to_dataframe_DGCF(train_list, test_list)
-
         dataset_manager = DatasetMapperManager()
         dataset_manager.add_URM(URM_dataframe, "URM_all")
         loaded_dataset = dataset_manager.generate_Dataset(dataset_name=self._get_dataset_name(),

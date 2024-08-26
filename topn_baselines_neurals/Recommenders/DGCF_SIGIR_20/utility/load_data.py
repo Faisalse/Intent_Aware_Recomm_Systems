@@ -16,19 +16,14 @@ class Data(object):
     def __init__(self, path, batch_size):
         self.path = path
         self.batch_size = batch_size
-
-        print(path)
-
-        train_file = path + '/train.txt'
-        test_file = path + '/test.txt'
+        train_file = path / 'train.txt'
+        test_file = path / 'test.txt'
 
         #get number of users and items
         self.n_users, self.n_items = 0, 0
         self.n_train, self.n_test = 0, 0
         self.neg_pools = {}
-
         self.exist_users = []
-
         with open(train_file) as f:
             for l in f.readlines():
                 if len(l) > 0:
@@ -52,9 +47,7 @@ class Data(object):
                     self.n_test += len(items)
         self.n_items += 1
         self.n_users += 1
-
         self.print_statistics()
-
         self.R = sp.dok_matrix((self.n_users, self.n_items), dtype=np.float32)
 
         self.train_items, self.test_set = {}, {}
@@ -86,33 +79,29 @@ class Data(object):
     def get_adj_mat(self):
         try:
             t1 = time()
-            adj_mat = sp.load_npz(self.path + '/s_adj_mat.npz')
-            norm_adj_mat = sp.load_npz(self.path + '/s_norm_adj_mat.npz')
-            mean_adj_mat = sp.load_npz(self.path + '/s_mean_adj_mat.npz')
+            adj_mat = sp.load_npz(self.path / 's_adj_mat.npz')
+            norm_adj_mat = sp.load_npz(self.path / 's_norm_adj_mat.npz')
+            mean_adj_mat = sp.load_npz(self.path / 's_mean_adj_mat.npz')
             print('already load adj matrix', adj_mat.shape, time() - t1)
 
         except Exception:
             adj_mat, norm_adj_mat, mean_adj_mat = self.create_adj_mat()
-            sp.save_npz(self.path + '/s_adj_mat.npz', adj_mat)
-            sp.save_npz(self.path + '/s_norm_adj_mat.npz', norm_adj_mat)
-            sp.save_npz(self.path + '/s_mean_adj_mat.npz', mean_adj_mat)
-            
+            sp.save_npz(self.path / 's_adj_mat.npz', adj_mat)
+            sp.save_npz(self.path / 's_norm_adj_mat.npz', norm_adj_mat)
+            sp.save_npz(self.path / 's_mean_adj_mat.npz', mean_adj_mat)    
         try:
-            pre_adj_mat = sp.load_npz(self.path + '/s_pre_adj_mat.npz')
+            pre_adj_mat = sp.load_npz(self.path / 's_pre_adj_mat.npz')
         except Exception:
             adj_mat=adj_mat
             rowsum = np.array(adj_mat.sum(1))
             d_inv = np.power(rowsum, -0.5).flatten()
             d_inv[np.isinf(d_inv)] = 0.
             d_mat_inv = sp.diags(d_inv)
-
             norm_adj = d_mat_inv.dot(adj_mat)
             norm_adj = norm_adj.dot(d_mat_inv)
             print('generate pre adjacency matrix.')
             pre_adj_mat = norm_adj.tocsr()
-            sp.save_npz(self.path + '/s_pre_adj_mat.npz', norm_adj)
-
-
+            sp.save_npz(self.path / 's_pre_adj_mat.npz', norm_adj)
         return adj_mat, norm_adj_mat, mean_adj_mat, pre_adj_mat
 
     def create_adj_mat(self):
@@ -252,7 +241,7 @@ class Data(object):
     def get_sparsity_split(self):
         try:
             split_uids, split_state = [], []
-            lines = open(self.path + '/sparsity.split', 'r').readlines()
+            lines = open(self.path / 'sparsity.split', 'r').readlines()
 
             for idx, line in enumerate(lines):
                 if idx % 2 == 0:
@@ -261,41 +250,33 @@ class Data(object):
                 else:
                     split_uids.append([int(uid) for uid in line.strip().split(' ')])
             print('get sparsity split.')
-
         except Exception:
             split_uids, split_state = self.create_sparsity_split()
-            f = open(self.path + '/sparsity.split', 'w')
+            f = open(self.path / 'sparsity.split', 'w')
             for idx in range(len(split_state)):
                 f.write(split_state[idx] + '\n')
                 f.write(' '.join([str(uid) for uid in split_uids[idx]]) + '\n')
             print('create sparsity split.')
-
         return split_uids, split_state
-
     def create_sparsity_split(self):
         all_users_to_test = list(self.test_set.keys())
         user_n_iid = dict()
-
         # generate a dictionary to store (key=n_iids, value=a list of uid).
         for uid in all_users_to_test:
             train_iids = self.train_items[uid]
             test_iids = self.test_set[uid]
-
             n_iids = len(train_iids) + len(test_iids)
-
             if n_iids not in user_n_iid.keys():
                 user_n_iid[n_iids] = [uid]
             else:
                 user_n_iid[n_iids].append(uid)
         split_uids = list()
-
         # split the whole user set into four subset.
         temp = []
         count = 1
         fold = 4
         n_count = (self.n_train + self.n_test)
         n_rates = 0
-
         split_state = []
         for idx, n_iids in enumerate(sorted(user_n_iid)):
             temp += user_n_iid[n_iids]

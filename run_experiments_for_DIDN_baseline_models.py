@@ -37,7 +37,6 @@ from DIDN.baselines.SR.main_sr import *
 # stop python warnings....
 import warnings
 warnings.filterwarnings("ignore")
-
 parser = argparse.ArgumentParser()
 parser.add_argument('--dataset', default='diginetica', help='diginetica/yoochoose1_4/yoochoose1_64')
 parser.add_argument('--batch_size', type=int, default=512, help='input batch size 512')
@@ -61,10 +60,8 @@ parser.add_argument('--pos_num', type=int, default=2000, help='the number of pos
 parser.add_argument('--neighbor_num', type=int, default=5, help='the number of neighboring sessions')
 parser.add_argument('--topkkk', type=float, default=[10, 20], help='learning rate') 
 parser.add_argument('--validation_session', type=float, default=10000, help='learning rate')
-
 parser.add_argument('--MRR', type=float, default=[10, 20], help='learning rate') 
 parser.add_argument('--Recall', type=float, default=[10, 20], help='learning rate') 
-
 args = parser.parse_args()
 print(args)
 here = os.path.dirname(os.path.abspath(__file__))
