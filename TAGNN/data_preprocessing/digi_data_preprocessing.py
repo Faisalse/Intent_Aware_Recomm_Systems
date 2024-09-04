@@ -47,7 +47,7 @@ def filter_data(data, min_item_support= MINIMUM_ITEM_SUPPORT, min_session_length
     session_lengths = data.groupby('SessionId').size()
     session_lengths = session_lengths[ session_lengths >= min_session_length ]
     data = data[np.in1d(data.SessionId, session_lengths.index)]
-
+    
     # filter item support
     data['ItemSupport'] = data.groupby('ItemId')['ItemId'].transform('count')
     data = data[data.ItemSupport >= min_item_support]

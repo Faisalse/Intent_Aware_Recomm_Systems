@@ -5,6 +5,32 @@ import torch
 from torch import nn
 from torch.nn import Module, Parameter
 import torch.nn.functional as F
+from TAGNN.accuracy_measures import *
+from tqdm import tqdm
+import pandas as pd
+class EarlyStopping:
+    def __init__(self, patience=5, delta=0):
+        self.patience = patience
+        self.delta = delta
+        self.best_score = None
+        self.early_stop = False
+        self.counter = 0
+        self.epoch = 0
+    def __call__(self, score, epoch):
+        if self.best_score is None:
+            self.best_score = score
+            self.epoch = epoch
+        elif score < self.best_score + self.delta:
+            self.counter += 1
+            if self.counter >= self.patience:
+                self.early_stop = True
+        else:
+            self.best_score = score
+            self.epoch = epoch
+            self.counter = 0
+
+    def save_model(self, model, path):
+        torch.save(model.state_dict(), path)
 
 
 class GNN(Module):
@@ -125,14 +151,10 @@ def forward(model, i, data):
     return targets, model.compute_scores(seq_hidden, mask)
 
 
-def model_training(model, train_data, epoch):
-    
+def model_training(model, train_data, test_data,  epoch_, top_value, validation = False):
     print('************* TAGNN training started***************')
-    
-    for epoch in range(epoch):
-        print('epoch: ', epoch + 1)
-        
-        # model training part.....
+    early_stopping = EarlyStopping() 
+    for epoch in tqdm(range(epoch_)):
         model.scheduler.step()
         model.train()
         total_loss = 0.0
@@ -145,22 +167,36 @@ def model_training(model, train_data, epoch):
             loss.backward()
             model.optimizer.step()
             total_loss += loss.item()
-            
         print('\tLoss:\t%.3f' % total_loss)
-    return model
-    # model.eval()
-    # hit, mrr = [], []
-    # slices = test_data.generate_batch(model.batch_size)
-    # for i in slices:
-    #     targets, scores = forward(model, i, test_data)
-    #     sub_scores = scores.topk(20)[1]
-    #     sub_scores = trans_to_cpu(sub_scores).detach().numpy()
-    #     for score, target, mask in zip(sub_scores, targets, test_data.mask):
-    #         hit.append(np.isin(target - 1, score))
-    #         if len(np.where(score == target - 1)[0]) == 0:
-    #             mrr.append(0)
-    #         else:
-    #             mrr.append(1 / (np.where(score == target - 1)[0][0] + 1))
-    # hit = np.mean(hit) * 100
-    # mrr = np.mean(mrr) * 100
-    # return hit, mrr
+        if validation:
+            measures = model_testing(model, test_data, top_value)
+            early_stopping(measures['HR_20'].score(), epoch)
+            if early_stopping.early_stop:
+                print("Early stopping")
+                return early_stopping.epoch + 1
+    if validation:
+        return epoch_
+    else:
+        measures = model_testing(model, test_data, top_value)
+        return measures
+def model_testing(model, test_data, top_list):
+    
+    Measures_ = dict()
+    for i in top_list:
+        Measures_["MRR_"+str(i)] = MRR(i)
+        Measures_["HR_"+str(i)] = HR(i)
+    model.eval()
+    slices = test_data.generate_batch(1)
+    for i in slices:
+        
+        target, scores = forward(model, i, test_data)
+        sub_scores = scores.topk(200)[1]
+        sub_scores = trans_to_cpu(sub_scores).detach().numpy()
+        sub_scores = np.ravel(sub_scores)
+        target = target[0] -1
+        recommendation_list = pd.Series([0 for i in range(len(sub_scores))], index = sub_scores)
+        # Calculate the MRR values
+        for key in Measures_:
+            Measures_[key].add(recommendation_list, target)
+        
+    return Measures_

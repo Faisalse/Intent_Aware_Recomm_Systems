@@ -3,10 +3,9 @@ from statistics import mean
 
 
 class MRR: 
-    
     def __init__(self, length=20):
-        self.length = length;
-        self.MRR_score = [];
+        self.length = length
+        self.MRR_score = []
     def add(self, recommendation_list, next_item):
         
         res = recommendation_list[:self.length]

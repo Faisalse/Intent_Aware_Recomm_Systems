@@ -93,8 +93,6 @@
 <li>Python=3.7.16</li>
 <li>TensorFlow=1.14.0</li>
 </ul>
-
-
 <h2>Follow these steps to reproduce the results for Intent Aware and Non-Intent Aware Recommender Systems</h2>
 <h5>TAGNN and baseline models</h5>
 <ul>
