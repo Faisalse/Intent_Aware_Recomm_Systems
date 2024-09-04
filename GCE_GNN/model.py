@@ -8,6 +8,32 @@ from GCE_GNN.aggregator import LocalAggregator, GlobalAggregator
 from torch.nn import Module, Parameter
 import torch.nn.functional as F
 
+class EarlyStopping:
+    def __init__(self, patience=5, delta=0):
+        self.patience = patience
+        self.delta = delta
+        self.best_score = None
+        self.early_stop = False
+        self.counter = 0
+        self.epoch = 0
+    def __call__(self, score, epoch):
+        if self.best_score is None:
+            self.best_score = score
+            self.epoch = epoch
+        elif score < self.best_score + self.delta:
+            self.counter += 1
+            if self.counter >= self.patience:
+                self.early_stop = True
+        else:
+            self.best_score = score
+            self.epoch = epoch
+            self.counter = 0
+
+    def save_model(self, model, path):
+        torch.save(model.state_dict(), path)
+
+
+
 
 class CombineGraph(Module):
     def __init__(self, opt, num_node, adj_all, num):
@@ -174,13 +200,14 @@ def forward(model, data):
     return targets, model.compute_scores(seq_hidden, mask)
 
 
-def train_test(model, train_data):
-    print('start training: ', datetime.datetime.now())
-    model.train()
+def model_training(model, train_data):
+    
     total_loss = 0.0
     train_loader = torch.utils.data.DataLoader(train_data, num_workers=4, batch_size=model.batch_size,
                                                shuffle=True, pin_memory=True)
+    
     for data in tqdm(train_loader):
+        
         model.optimizer.zero_grad()
         targets, scores = forward(model, data)
         targets = trans_to_cuda(targets).long()
@@ -190,30 +217,7 @@ def train_test(model, train_data):
         total_loss += loss
     print('\tLoss:\t%.3f' % total_loss)
     model.scheduler.step()
-
-    #print('start predicting: ', datetime.datetime.now())
-    # model.eval()
-    # test_loader = torch.utils.data.DataLoader(test_data, num_workers=4, batch_size=model.batch_size,
-    #                                           shuffle=False, pin_memory=True)
-    # result = []
-    # hit, mrr = [], []
-    # for data in test_loader:
-    #     targets, scores = forward(model, data)
-    #     sub_scores = scores.topk(20)[1]
-    #     sub_scores = trans_to_cpu(sub_scores).detach().numpy()
-    #     targets = targets.numpy()
-    #     for score, target, mask in zip(sub_scores, targets, test_data.mask):
-    #         hit.append(np.isin(target - 1, score))
-    #         if len(np.where(score == target - 1)[0]) == 0:
-    #             mrr.append(0)
-    #         else:
-    #             mrr.append(1 / (np.where(score == target - 1)[0][0] + 1))
-
-    # result.append(np.mean(hit) * 100)
-    # result.append(np.mean(mrr) * 100)
-
     return model
-
 
 def build_graph(num,   seq, sample_num = 12):
     relation = []

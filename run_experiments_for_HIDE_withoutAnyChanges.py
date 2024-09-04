@@ -15,7 +15,7 @@ def init_seed(seed=None):
     torch.manual_seed(seed)
     torch.cuda.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
-
+# 
 parser = argparse.ArgumentParser()
 parser.add_argument('--dataset', default='Tmall', help='diginetica/Nowplaying/Tmall')
 parser.add_argument('--model', default='HIDE', help='[GCEGNN, SRGNN, DHCN, SAHNN, COTREC]')

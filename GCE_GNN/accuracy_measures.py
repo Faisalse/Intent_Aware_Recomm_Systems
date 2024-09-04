@@ -20,25 +20,18 @@ class MRR:
         return mean(self.MRR_score)
 
 
-class HR: 
-    
+class HR:
     def __init__(self, length=20):
         self.length = length
         self.HR_score = []
         self.totat_sessionsIn_data = 0
         
     def add(self, recommendation_list, next_item):
-        
         res = recommendation_list[:self.length]
         if next_item in res.index:
-            self.HR_score.append(1.0)
-            
+            self.HR_score.append(1.0)    
         else:
             self.HR_score.append(0)
-        
-            
-        
-
     def score(self):
         return mean(self.HR_score)                    
 
