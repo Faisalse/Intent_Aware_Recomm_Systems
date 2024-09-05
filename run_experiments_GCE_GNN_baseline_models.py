@@ -159,9 +159,6 @@ def testing(model, test_data):
         for key in peroformance_measure:
             peroformance_measure[key].add(recommendation_list, target)
     return peroformance_measure
-
-
-
 if __name__ == '__main__':
     
     print("Experiments are runing for each model. After execution, the results will be saved into *results*. Thanks for patience.")
